@@ -1,0 +1,32 @@
+The details page is the page you get to from the edit details popup and then click on the secont tab (suggest tab is called
+"Detailed Descripiton"). For this you go to a server URL server/details/<id> where <id> is supplied, and you will receive 
+something like details.json.
+
+On submit the same payload (but modified!) should go back to the same URL with a POST.
+
+There is no need to do anything with "id", it will match the id you supplied. "name" should be the title of the page, and 
+editable. Similarly, "organiser" and "where".
+
+Under this is "groups". This is an array, each of which represents a section, with a heading. The heading should be derived
+from "name" and "term" in each group. The "code" should be displayed in an editable text field below the title with the
+label "pattern" (or similar).
+
+Inside each of these headings is a table with four columns, who, what, where, and Number/Date. At the start there should be
+one member for each of the "elements" values, with code going into Number/Date. Order of the array is important and should 
+be preserved. If there's time it would be good to make the table reorderable by dragging, for when a user wants to explicitly
+change the order. It should be possible to delete a row.
+
+If who, what, or where are missing from the JSON they should be pulled from the course name, organizer and location at the top
+level. If code is missing, the field should be blank.
+
+Under these tables should be the ability to add a row. The default values for who, what and where should be from the row
+above and, if no row above, from the course name, organizer and location at the top level.
+
+The table should span the screen and the code cell about 10 characters wide, the others roughly equal size of the remainder.
+
+The metadata field can be ignored on this page, but should be preserved.
+
+At the bottom should be an update button to send the modified payload back to the server.
+
+The layout should be somewhat like the attached layout, and the values displayed correspond to the details.json file in this 
+folder.

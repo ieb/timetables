@@ -1,0 +1,34 @@
+{
+	'id': "1234567890ABCDEF",
+	'courses': {
+		"123456789ABCDEF0":
+		{
+			"name": "Elementary Maths for Biologists",
+			"id": "123456789ABCDEF0"
+		},
+		"123456789ABCDEF1":
+		{
+			"name": "Physics",
+			"id": "123456789ABCDEF1"
+		},
+		"123456789ABCDEF2":
+		{
+			"name": "Chemistry",
+			"id": "123456789ABCDEF2"
+		}
+	},
+	'sel': ['123456789ABCDEF0','123456789ABCDEF1'],
+	'rectangles': [
+		{
+			"day": 2,
+			"start": [13,0],
+			"end": [14,30],
+			"id": "123456789ABCDEF2",
+			"text": "Elementary Maths For Biologists (lecture)",
+			"type": "lecture",
+			"terms": [0,1],
+			"weeks": [1,3,4,5]
+		}
+	
+	]
+}

@@ -1,0 +1,20 @@
+NOTE THE TERM DROPDOWN IS MISSING FROM THE LAYOUT SCREENSHOT: THAT IS A MISTAKE.
+
+The top of the calendar page is driven by a call to server/top. This returns json per top.json, and is used to drive the top
+strip. The top strip has four dropdowns, year, tripos and part and term, and a multiselect component (course). 
+year, part and tripos are driven from top. Terms is fixed. top.json provides an ordered list of years containing an ordered 
+list of triposes, containing an ordered list of parts. Each pair has an ID, known as the tripospart id.
+
+The final multi-select component can be implemented however is best in UI terms (it's difficult being a horizontal space) but
+needs to allow the user to select arbitrary combinations. There may well often be about 20 to choose from. These are recoverable 
+from server/calendar/<id> where id is the tripospart id of the currently selected tripos/part/year as given in top.json. 
+A typical result is given in calendar.json, and this is the same data used to populate the calendar (separate spec), but you can
+ignore everything except the values in the "courses" key, which lists all courses, their names and IDs, for the multiselect
+component. You can ignore the keys to courses, which is just a repitition of the id.
+
+By default (eg when just loaded and after change of tripos/year/part) all should be ticked.
+
+The purpose of this topbar process is to give you a list of selected courseids (which are the ids inside the calendar.json)
+which you can then use to query to build the calendar.
+
+See the screenshot in calendar-popup for an example.

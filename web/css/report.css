@@ -1,0 +1,25 @@
+.report h2 {
+	font-size: 24px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.report .report_header {
+	margin: 0 auto;
+	text-align: center;	
+}
+
+.report .report_footer {
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.report .report_entries dt{ 
+	margin: 16px 16px 4px 16px;
+	font-variant: small-caps;
+	font-size: 125%;
+}
+	
+.report .report_entries dd {
+	margin: 4px 16px 16px 32px;
+}

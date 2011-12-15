@@ -1,0 +1,60 @@
+{
+	"years": [{
+	
+		"name": "2010/11",
+		"triposes": [{
+			"name": "NST",
+			"parts": [
+				{
+					"name": "IA",
+					"id": "1A2B3C4D5E6F0000"
+				},
+				{
+					"name": "IB",
+					"id": "1A2B3C4D5E6F0001"
+				}
+			]
+		},{
+			"name": "CST",
+			"parts": [
+				{
+					"name": "IA",
+					"id": "1A2B3C4D5E6F0002"
+				},
+				{
+					"name": "IB",
+					"id": "1A2B3C4D5E6F0003"
+				}
+			]
+		}]	
+	},
+	{
+		"name": "2011/12",
+		"triposes": [{
+			"name": "NST",
+			"parts": [
+				{
+					"name": "IA",
+					"id": "1A2B3C4D5E6F0004"
+				},
+				{
+					"name": "IB",
+					"id": "1A2B3C4D5E6F0005"
+				}
+			]
+		},{
+			"name": "CST",
+			"parts": [
+				{
+					"name": "IA",
+					"id": "1A2B3C4D5E6F0006"
+				},
+				{
+					"name": "IB",
+					"id": "1A2B3C4D5E6F0007"
+				}
+			]
+		}]		
+	
+	}]
+}

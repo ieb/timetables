@@ -1,0 +1,1 @@
+These specs remain essentially correct, and are a good grounding in how the client / server protocol essentially still works. However, some small details may have changed in the implementation. Oszkar has as much memory as me on these things as he implemented the client side. Examining payloads in Firebug (or equivalent) should confirm any small changes.

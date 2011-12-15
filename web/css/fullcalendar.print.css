@@ -1,0 +1,41 @@
+/*
+ * FullCalendar v1.5.1 Print Stylesheet
+ *
+ * Include this stylesheet on your page to get a more printer-friendly calendar.
+ * When including this stylesheet, use the media='print' attribute of the <link> tag.
+ * Make sure to include this stylesheet IN ADDITION to the regular fullcalendar.css.
+ *
+ * Copyright (c) 2011 Adam Shaw
+ * Dual licensed under the MIT and GPL licenses, located in
+ * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
+ *
+ * Date: Sat Apr 9 14:09:51 2011 -0700
+ *
+ */
+
+
+/* Mercury CSS
+-----------------------------------------------------*/
+body {
+    background: #fff !important;
+}
+
+#cal_select_container {
+    display: none !important;
+}
+
+ /* fullCalendar CSS
+-----------------------------------------------------*/
+
+
+.fc-event-skin {
+    color: #000 !important;
+}
+
+.fc-agenda-slots td {
+    background: #fff !important;
+}
+
+.fc-event .ui-resizable-handle {
+    display: none !important;
+}

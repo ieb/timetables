@@ -1,0 +1,21 @@
+The popup appears when you select a rectangle from the calendar. It should, therefore, always be aware of a course id
+context in which it operates, if editing an existing course, or else represent course which has just been dragged out.
+
+In the case of an existing course, a call to server/details/<id> and returning data per details.json will supply values for
+the fields in the popup. Course represents the name of the course, and is pulled from the top level name field, ditto
+organiser and where. All three are blank for new creations. The type dropdown should have some default options: "lecture",
+"lab", "field trip" and "examples class" and also an option "other" which turns it into a text entry box to allow freeform
+entry. 
+
+Terms and weeks can be pulled from the values in the relevant fields in the calendar JSON of the rectangle corresponding to the
+popup. Note that it's possible for weeks to contain very large values. In this case, disable the week selector and pass the
+values for week through unaltered. The term selector should have tickboxes for Michaelmas, Lent and Easter (0,1,2), all of 
+which should be ticked by default (eg new creation), and the weeks selector for weeks 0-9, but only 1-8 selected by default 
+(eg new creation).
+
+All of the values in the popup are saved by updating the values to the relevant JSON in the calendar.json and updating it by
+posting to the URL it was GET-ted from.
+
+The details button should open the summary/details page using the course id in hand.
+
+Ommitted from the pdf, but should be present, is a delete button in the popup to remove a rectangle all together.

@@ -1,0 +1,15 @@
+The summary page is the page you get to from the edit details popup and then click on the secont tab (suggest tab is called
+"Detailed Descripiton"). For this you go to a server URL server/details/<id> where <id> is supplied, and you will receive 
+something like details.json in the details-page folder.
+
+You can ignore everything except the "title" (which should be displayed and editable), "orgainizer" and "where" (ditto), and
+the metadata hash. Each value in the metadata hash should be displayed with a rich textarea next to it, pupulated with the
+value. The title of the section should be derived from the key by replacing - and _ by space and uppercasing each word's
+first letter. The order should be fixed for known keys, and other keys can be added in alphabetical order. The known keys
+are "notes" and "course description", in that order. In the example supplied there's one other entry, "special-instructions", 
+which should be displayed below, in a section "Special Instructions".
+
+Saving should return the same blob, but with values updated, including all the fields ignored by this page. Update is by post
+to the same URL, as it is for the details page.
+
+The attached should give you an example of the layout, and the values should be per the details.json file.

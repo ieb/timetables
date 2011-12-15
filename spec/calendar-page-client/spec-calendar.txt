@@ -1,0 +1,19 @@
+The outcome of the top process is to produce a list of IDs for the calendar. A call to server/calendar with ?id=a,b,c where 
+a b and c are course ids and "," is a literal comma returns the same calenar.json file as used in top, but this time the
+other keys are of interest.
+
+sel just reflects back the selections which you passed, and id the tripospart id. The interesting hash is rectangles which
+contains the elements to put onto the calendar. "day" is the day (0=Mo,...5=Sa). and start and end time are the time in 24hr 
+clock. The value of "text" should be displayed inside the rectrangle (it will typically be the course name, but may well have
+some other stuff in it, so don't second guess it). ID is the course id for use in the popup and, ultimately the summary and
+details pages. "terms", "type" and "weeks" can be ignored, they are for the calendar popup.
+
+As a calendar view is per-term, rectangles outside the current term should be ignored. Moving should move the rectangle in all
+the terms where it is present (will do this by default, anyway, if you don't tinker with "terms").
+
+See the screenshot in calendar-popup for an example of a layout.
+
+Updates to the calendar should be performed by resubmitting updated JSON to the server via POST to the same URL. Note that sel
+must be present and correct to ensure the rectangle updates proceed correctly (the correct value is the one which was used to
+DISPLAY the calendar which has changed, not any more recent value). (eg it is the only way for the server to 
+disintguish the disappearance of a rectangle and it not having been displayed in the first place).

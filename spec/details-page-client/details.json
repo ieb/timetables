@@ -1,0 +1,64 @@
+{
+	"id": "emb",
+	"name": "Elementary Maths for Biologists",
+	"organiser": "Dr. R. W. Broadhurst",
+	"metadata": {
+		"notes": "notes",
+		"course-description": "Course",
+		"special-instructions": "Hello",
+	}
+	"where": "Lecture Room A",
+	"groups": [
+		{
+			"name": "Lectures",
+			"term": "Michaelmas",
+			"code": "Mi MF 9",
+			"elements": [
+				{
+					"who": "Dr. J. Koenig",
+					"what": "Introduction",
+					"code": "8Oct"
+				},
+				{
+					"who": "Dr. J. Koenig",
+					"what": "Algebra, Units and Graphs",
+					"code": "13-27 Oct W"
+				},
+				{
+					"who": "Dr. B. Beckles",
+					"what": "Introduction to Computing and Excel",
+					"where": "Titan Teaching Rooms",
+					"code": "11-25 Oct"
+				}
+			]
+		},
+		{
+			"name": "Examples Classes",
+			"term": "Michaelmas",
+			"code": "Mi W 9",
+			"elements": [
+				{
+					"code": "3Nov-1Dec",
+					"where": "Large Classroom, Pharmacology"
+				}
+			]
+		},
+		{
+			"name": "Lectures",
+			"term": "Lent",
+			"code": "Le M-F 9",
+			"elements": [
+				{
+					"who": "Dr. R. W. Broadhurst",
+					"what": "Calculus II",
+					"code": "6"
+				},
+				{
+					"who": "Dr. J. W. Dalley",
+					"what": "Statistics",
+					"code": "10"
+				}
+			]
+		}
+	]
+}

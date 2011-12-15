@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lecture Listings -- University of Cambridge (incorporating University of Cambridge Reporter Lecture List)</title>
+
+    <!-- Lib CSS -->
+	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.8.14.custom.css" type="text/css" media="screen, print" />
+    <link rel="stylesheet" href="css/fullcalendar.css" type="text/css" media="screen, print" />
+    <link rel="stylesheet" href="css/fullcalendar.print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="css/jquery-ui-multiselect.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/jquery.gritter.css" type="text/css" media="screen" />
+	
+	<!-- Mercury CSS -->
+	<link rel="stylesheet" href="css/mercury.css" type="text/css" media="screen, print" />
+
+
+    <!-- Libs JS-->
+    <script src="lib/common-libs.js" type="text/javascript"></script>
+	<script src="lib/jstorage.min.js" type="text/javascript"></script>
+	<script src="js/log.js" type="text/javascript"></script>
+
+    <!-- Mercury Lib JS-->
+    <script src="js/mercury-common.js" type="text/javascript"></script>
+	<script src="lib/fullcalendar.min.js" type="text/javascript"></script>
+
+</head>
+
+<body class="studentview" id="embed_body">
+
+	<div id="view_popup" style="display:none;">
+		<div id="view_details"></div>
+	</div>
+
+	<div id="embed_top">
+		
+		<div id="embed_container">
+			<a href='javascript:;' id="embed">embed/ical</a>
+		</div>
+
+		<div id="embed_popup" style="display: none;">
+			<h2>iCalendar</h2>
+			<p>
+				iCalendar is suitable for Google Calendar, iCal, and most Desktop and phone calendar programmes. Find the function in your
+				software to "Add a URL" and add the URL below:
+			</p>
+			<p>				
+				<a href="javascript:;" id="embed_ical"></a>
+			</p>
+			<h2>gCal JSON feed</h2>
+			<p>
+				This format will be useful for those of you with some homegrown systems including those using the FullCalendar widget,
+				but will be little use for others. It is the most comprehensive feed.
+			</p>
+			<p>				
+				<a href="javascript:;" id="embed_gcal"></a>
+			</p>
+			<h2>Site Embed</h2>
+			<p>
+				Put the code below into your website to embed this calendar.
+			</p>
+			<p>
+				<textarea id="embed_embed"></textarea>
+			</p>
+			<h2>RSS feed</h2>
+			<p>
+				(coming soon)
+			</p>
+			<h2>News Widget</h2>
+			<p>
+				(coming soon)
+			</p>
+		</div>
+
+		
+		<div id="embed_out"> <a href="javascript:;">visit main timetable site</a> </div>
+        <span id="calevent_text"></span>
+	</div>
+
+    <div id="calendar_container">
+			<!-- Filled by JS -->
+	</div>
+
+    <div id="embed_headfoot">
+			<div class="head">
+			</div>
+    </div>
+
+	
+	<!-- Page JS-->
+    <script src="js/view.js" type="text/javascript"></script>
+
+</body>
+</html>
+

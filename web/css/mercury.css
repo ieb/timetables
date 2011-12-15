@@ -1,0 +1,723 @@
+/*
+  Reset/normalisation from HTML5 boilerplate (http://html5boilerplate.com/)
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video
+{ margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+{ display:block; }
+
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size: 1em; vertical-align:baseline; background:transparent; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help; }
+
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+
+input, select { vertical-align:middle; }
+
+/* END RESET CSS */
+
+/* fonts.css from the YUI Library: developer.yahoo.com/yui/
+   Refer to developer.yahoo.com/yui/3/cssfonts/ for font sizing percentages
+*/
+body
+{ font:12px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+
+select, input, textarea, button { font:99% sans-serif; }
+
+pre, code, kbd, samp
+{ font-family: monospace, sans-serif; }
+
+
+/*
+ * minimal base styles
+ */
+
+
+body, select, input, textarea
+{
+  /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
+  color: #444;
+  /* set your base font here, to apply evenly */
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6
+{ font-weight: bold; }
+
+/* always force a scrollbar in non-IE */
+html { overflow-y: scroll; }
+
+
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+a, a:active, a:visited { color: #607890; }
+a:hover { color: #036; }
+
+
+ul, ol { margin-left: 1.8em; }
+ol { list-style-type: decimal; }
+
+/* Remove margins for navigation lists */
+nav ul, nav li { margin: 0; }
+
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+
+td, td img { vertical-align: middle; }
+
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+
+pre {
+  padding: 15px;
+
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; /* CSS2 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+}
+
+textarea
+{ overflow: auto; }
+
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"]
+{ vertical-align: text-bottom; }
+
+input[type="checkbox"]
+{ vertical-align: bottom; }
+
+label, input[type=button], input[type=submit], button
+{ cursor: pointer; }
+
+button, input, select, textarea
+{ margin: 0; }
+
+/*  j.mp/webkit-tap-highlight-color */
+a:link
+{ -webkit-tap-highlight-color: #FF5E99; }
+
+button
+{ width: auto; overflow: visible; }
+
+
+
+/*
+ * Non-semantic helper classes
+ */
+
+/* Hide for both screenreaders and browsers */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders */
+.visuallyhidden
+{ position: absolute !important; clip: rect(1px 1px 1px 1px); /* IE6, IE7 */ clip: rect(1px, 1px, 1px, 1px); }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+.clearfix:before, .clearfix:after
+{ content: "\0020"; display: block; height: 0; visibility: hidden; }
+.clearfix:after
+{ clear: both; }
+.clearfix
+{ zoom: 1; }
+
+
+
+/*
+ * Mercury CSS
+ */
+
+body {
+    font-family: Tahoma, Geneva, Verdana, "Bitstream Vera Sans", sans-serif;
+    background: #333;
+}
+
+
+/* General things */
+label
+{ color: #313C41; display: block; margin: 5px 0 2px; clear: both; }
+
+ul, ol
+{ margin: 0; }
+
+ul li
+{ list-style-type: none; padding: 0 0 10px 0; }
+
+a:hover
+{ text-decoration: underline; }
+
+.force-right
+{ text-align: right !important; }
+
+.force-center
+{ text-align: center !important; }
+
+.inline
+{ display: inline; }
+
+
+
+#header
+{ height: 50px; background: #333333 url(../images/ucam-logo.png) 20px 10px no-repeat; color: #fff; padding: 0; }
+
+#header .product_logo {
+  width: 180px;
+  height: 50px;
+  float: left;
+  display: block;
+}
+
+#header .product_title
+{ font-size: 2.4em; font-weight: normal; padding: 7px 0 0 180px; font-family: Arial, sans-serif; color: #eee; font-weight: normal; cursor: pointer; }
+
+#header .product_title a
+{ color: #eee; text-decoration: none; }
+
+
+/* jQuery UI or other plugin overrides */
+.ui-dialog
+{ box-shadow: 0 0 3px #333333; }
+
+.ui-tabs .ui-tabs-nav
+{ background: #fff; border-left: medium none; border-radius: 0 0 0 0; border-right: medium none; border-top: medium none; padding: 10px 25px 0; }
+
+
+.ui-multiselect-checkboxes label input
+{ margin: 0 10px 0 5px; position: relative; top: -1px; }
+
+.ui-multiselect-checkboxes .ui-state-hover
+{ padding: 5px 5px 5px 0; }
+
+.ui-multiselect {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #999999;
+    border-radius: 5px 5px 5px 5px;
+    color: #333333;
+    font-weight: normal;
+    padding: 1px 0 1px 5px;
+    text-align: left;
+}
+
+.ui-multiselect-menu {
+    background: none repeat scroll 0 0 #DADEE4;
+    border-radius: 0 0 0 0;
+    box-shadow: 0 2px 1px #aaa;
+}
+
+.ui-multiselect-checkboxes
+{ padding: 6px 0 0; overflow-y: auto; }
+
+.ui-multiselect-checkboxes li label span
+{ padding: 2px 0 0 0;  }
+
+.ui-multiselect-all, .ui-multiselect-none
+{ line-height: 17px; }
+
+
+.fc-event
+{ box-shadow: 0 1px 2px #333333; }
+
+.fc-border-separate th, .fc-border-separate td
+{ border-top: none; padding: 2px 0; }
+
+thead .fc-thu, thead .fc-fri, thead .fc-sat, thead .fc-sun, thead .fc-mon, thead .fc-tue, thead .fc-wed
+{ background: #C5C9CF;  }
+
+.fc-agenda .fc-agenda-axis
+{ background: #C5C9CF; }
+
+.fc-event-vert .fc-event-head, .fc-event-vert .fc-event-content
+{ padding: 2px 0 0 2px; }
+
+.fc-event-time, .fc-event-title
+{ font-size: 0.95em; }
+
+
+/* Login */
+#login_dialog_container .login-intro
+{ margin: 10px 0 10px 0; }
+
+#login_dialog_container input
+{ width: 240px; border: 1px solid #999; font-weight: bold; padding: 2px 5px; margin: 0 0 10px 0; }
+
+#login_error
+{ margin: 10px 0 0 0; color: #E00015; font-size: 1.2em; }
+
+
+
+/* List */
+#select_container
+{ height: 30px; padding: 5px 20px; line-height: 30px; background: #DADEE4; }
+
+#select_container label
+{ display: inline; padding: 0 5px 0 0; }
+
+#select_container select
+{ margin: 0 20px 0 0; }
+
+#select_tripos, #select_part
+{ width: 200px; }
+
+#courselist_container
+{ padding: 20px; background: #fff; min-height: 500px; }
+
+#courselist_container .page-title
+{ font-size: 1.5em; padding: 0 0 20px 10px; color: #222222; }
+
+#static_timetables
+{ margin: 10px 0; }
+
+#static_timetables .course-static-link
+{ font-size: 1.3em; text-decoration: none; padding: 0 0 0 10px; }
+
+#static_timetables .course-static-link:hover
+{ text-decoration: underline; }
+
+#courselist_container .course-list-item-container
+{ border-top: 1px dotted #666666; padding: 5px 10px; width: 80%; }
+
+#courselist_container .course-list-item-container:hover
+{ background: #DADEE4; }
+
+#courselist_container .course-list-item-container .course-list-courselink, #courselist_container .course-list-item-container .course-list-coursename
+{ font-size: 1.3em; color: #262E33; text-decoration: none; }
+
+#courselist_container .course-list-item-container .course-static-link
+{ display: inline-block; margin: 0 0 2px; padding: 0 10px 0 0; }
+
+#courselist_container .course-list-item-container .course-list-curselink:hover
+{ text-decoration: underline; }
+
+#courselist_container .course-list-item-container .course-list-termlink
+{ display: inline-block; margin: 2px 0; padding: 0 10px 0 0; text-decoration: none; color: #444444; }
+
+#courselist_container .course-list-item-container .course-list-termlink:hover
+{ text-decoration: underline; }
+
+
+#link_login
+{ float: right; }
+
+/* Calendar */
+#cal_select_container
+{ height: 60px; padding: 0 20px 5px; line-height: 30px; background: #DADEE4; border-bottom: 2px dotted #666666; }
+
+#cal_select_container label
+{ display: inline; }
+
+#cal_select_container select
+{ margin: 0 20px 0 0; color: #333; }
+
+#cal_select_container label.select-label[for='select-course']
+{ margin: 0 0 0 12px; }
+
+#calevent_text
+{  }
+
+#quickedit_container
+{  }
+
+#quickedit_container .qe-label
+{ font-size: 0.9em; color: #4E5F67; margin: 10px 0 2px 0; }
+
+#quickedit_container input[type='text']
+{ width: 90%; }
+
+#qe_subevents_selector
+{ width: 85%; }
+
+#quickedit_container .qe-data
+{ border: 1px solid #999; background: #fff; font-weight: bold; color: #232A2E; padding: 2px 5px; }
+
+#qe_actionbar
+{ clear: both; margin: 10px 0 0 0; }
+
+
+
+
+/* Edit */
+
+.edit-content
+{ background: #DADEE4; padding: 10px 0 20px 0; }
+
+.edit-page-title
+{ font-size: 1.5em; color: #222; margin: 0 0 20px 50px; }
+
+#details_tab_container
+{ margin: 0 20px; background: #fff; position: inherit; /* Needed for jqUI bug in sortable in FF (scroll position when element is dragged) */ }
+
+#details_tab_container .det-label
+{ color: #333D43; margin: 15px 0 5px 0; }
+
+#details_tab_container .det-data
+{ border: 1px solid #999; background: #fff; font-weight: bold; color: #232A2E; padding: 2px 5px; width: 75%; }
+
+#details_tab_container .buttonbar
+{ margin: 10px 0; }
+
+#eventgroup_container .eg-term-container
+{ padding: 10px; margin: 0 0 10px; }
+
+#eventgroup_container .eg-term-container .eg-term
+{ font-size: 1.6em; color: #244359; padding: 10px 0 5px 10px; border-bottom: 3px solid #244359;}
+
+#eventgroup_container .eg-term-container .eg-name
+{ font-size: 1.3em; font-style: italic; }
+
+#eventgroup_container .eg-term-container .eg-label
+{ padding: 0 0 0 5px; font-size: 0.9em;  }
+
+#eventgroup_container .eg-term-container .eg
+{ margin: 10px 0 10px 0; padding: 10px; border: 1px dashed #777B7E; }
+
+#eventgroup_container .eg-term-container .eg-data
+{ border: 1px solid #999; background: #fff; font-weight: bold; color: #232A2E; padding: 2px 5px; }
+
+#eventgroup_container .eg-term-container .eg-elements-container
+{ width: 95%; margin: 10px 0; }
+
+#eventgroup_container .eg-term-container .eg-elements-container thead th
+{ color: #555555; font-size: 0.9em; font-weight: normal; padding: 0 0 2px 10px; text-align: left; }
+
+#eventgroup_container .eg-term-container .eg-elements-container thead .merge-head
+{ text-align: center; padding: 0 0 2px 0; }
+
+#eventgroup_container .eg-term-container .eg-elements-container tr
+{  }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-element
+{ background: #D7DBE2; height: 35px; }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-elementdata
+{ border: 1px solid #999; background: #fff; font-weight: bold; color: #232A2E; padding: 2px 5px; width: 90%; }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-elementdata-merge
+{ width: auto; }
+
+#eventgroup_container .eg-term-container .eg-elements-container tr td
+{ padding: 0 5px; height: 25px; }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-element-reorderhandle
+{  }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-element-reorderhandle:hover
+{ cursor: move; }
+
+#eventgroup_container .eg-term-container .eg-elements-container .eg-element-delete-button
+{ }
+
+#eventgroup_container .eg-element-add-button, #eventgroup_container .add_eg_button {
+    background: none repeat scroll 0 0 #ECEDEE;
+    border: 1px solid #B4BDC5;
+    border-radius: 4px 4px 4px 4px;
+    color: #256A98;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 1px 5px 2px 5px;
+    text-decoration: none;
+    font-size: 0.94em;
+}
+
+#eventgroup_container .eg-element-add-button:hover, #eventgroup_container .add_eg_button:hover
+{ background: #DCDFDF; color: #222; }
+
+#eventgroup_container .eg-element-add-button span, #eventgroup_container .add_eg_button span
+{ display: inline-block; position: relative; top: 3px;}
+
+/* Delegation */
+#delegate_dialog p {
+	margin: 8px;
+}
+#rescind_dialog p {
+    margin: 8px;
+}
+#logfill {
+    margin: 16px;    
+}
+#delfill {
+    margin: 16px;        
+}
+
+#link_login {
+	margin-right: 8px;
+}
+
+#tinymce p {
+	font-size: 14px;	
+}
+
+/* STUDENT VIEW */
+.studentview #calendar_container
+{ background: #DADEE4; padding: 10px 0 0 0; }
+
+
+
+.studentview .fc-header-title h2
+{ font-size: 1.2em; color: #333; padding: 5px 0 0 0; font-weight: normal; }
+
+.studentview .fc-header-left
+{ padding: 0 0 0 10px; }
+
+.studentview .fc-header-right
+{ padding: 0 10px 0 0; }
+
+.studentview .fc-today
+{ background: #A9BFC8; }
+
+.studentview #calevent_text {
+	font-size: 80%;
+}
+
+/* FRONT PAGE */
+
+#front_page #fp_inner {
+	max-width: 800px;
+	padding: 20px;
+	margin: auto;
+}
+
+#front_page p {
+	margin: 16px;
+}
+
+#front_page h1 {
+	margin: 16px 0;
+	font-size: 130%;
+}
+
+#front_page h2 {
+	margin: 16px 0;
+}
+
+#front_page .list_link {
+	float: right;
+}
+
+.studentview #link_login {
+	margin: 8px 16px;
+}
+
+.studentview #link_login a {
+	color: white;
+}
+
+.studentview #headfoot {
+	background: #DADEE4;	
+	float: right;
+	width: 48%;
+}
+
+.studentview #embed_headfoot {
+	background: #DADEE4;	
+	width: 100%;
+}
+
+.studentview #embed_top {
+	height: 16px;
+	background: #DADEE4;
+	padding: 0 8px;	
+}
+
+#headfoothide,#headfootshow {
+	float: right;
+	margin: 8px;
+	clear: both;
+	font-size: 90%;
+	height: 70px;
+}
+
+#hideshowlinks {
+	line-height: 100%;
+	float: right;
+}
+
+.studentview .head {
+	background: none;
+	font-size: 70%;
+	padding: 8px;
+	overflow-y: auto;
+	max-height: 70px;
+}
+
+#embed_body.studentview .head {
+	max-height: 53px;
+}
+
+.studentview #cal_select_container {
+	border: none;
+	height: 70px;
+	line-height: 20px;
+}
+
+.studentview #cal_select_container select {
+	margin: 0;
+}
+
+.studentview #cal_select_container label.select-label[for='select-course']
+{ margin: 0; }
+
+#embed_container {
+	float: right;
+}
+
+#embed_body #embed_container {
+	margin: 0 8px;
+}
+
+#embed_popup h2 {
+	margin: 8px 0;
+}
+
+#embed_body {
+	background: #DADEE4;
+}
+
+#embed_embed {
+	width: 100%;
+}
+
+#embed_out {
+	float: right;
+}
+
+table#time_table, #time_table tr, #time_table td, #time_table th {
+	margin: 8px;
+	padding: 4px;
+	border: 1px solid black;
+}
+
+#time_table th {
+	background: #DADEE4;
+}
+
+.lowjs {
+	text-align: center;
+	margin: 8px auto;
+	padding: 8px;
+	width: 100%;
+	background: #DADEE4;	
+}
+
+/* BUTTONS */
+
+.btn {
+	float: left;
+	clear: both;
+	background: url(../images/btn_left.png) no-repeat green;
+	padding: 0 0 0 10px;
+	margin: 5px 0 5px 300px;
+}
+.btn a{
+	float: left;
+	height: 40px;
+	background: url(../images/btn_stretch.png) repeat-x left top;
+	line-height: 40px;
+	padding: 0 10px;
+	color: #fff;
+	font-size: 1em;
+	text-decoration: none;
+}
+.btn span {
+	background: url(../images/btn_right.png) no-repeat;
+	float: left;
+	width: 10px;
+	height: 40px;
+}
+.btn_addtocart { background-color: green; }
+.btn_checkout { background-color: red; }
+.btn_learnmore { background-color: orange; }
+.btn_try { background-color: #002c85; }
+.clear {
+	clear: both;
+}
+
+#front_page {
+	background: white;
+}
+
+.fp_notice {
+	border: 1px solid red;
+	background: #DADEE4;
+	padding: 8px;
+}
+
+#report_select ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#report_select li {
+	float: left;
+	border: 1px solid #bbb;
+	border-bottom-width: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#report_select a {
+	text-decoration: none;
+	display: block;
+	background: #eee;
+	padding: 0.24em 1em;
+	color: #00c;
+	width: 16em;
+	text-align: center;
+}
+
+#report_select a:hover {
+	background: #ddf;
+}
+
+#report_select .selected {
+	border-color: black;
+}
+
+#report_select .selected a {
+	position: relative;
+	top: 1px;
+	background: white;
+	color: black;
+	font-weight: bold;
+}
+
+#subselect {
+	border-top: 1px solid black;
+	clear: both;
+	padding: 0 1em;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lecture Listings -- University of Cambridge (incorporating University of Cambridge Reporter Lecture List)</title>
+
+    <!-- Mercury CSS -->
+    <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.8.14.custom.css" type="text/css" media="screen, print" />
+    <link rel="stylesheet" href="css/jquery.gritter.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/mercury.css" type="text/css" media="screen, print" />
+
+    <!-- Libs JS-->
+    <script src="lib/common-libs.js" type="text/javascript"></script>
+	<script src="lib/jstorage.min.js" type="text/javascript"></script>
+    <script src="lib/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+
+    <!-- Mercury Lib JS-->
+    <script src="js/mercury-common.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+    <!-- App header -->
+    <div id="header">
+		<a href="http://www.cam.ac.uk/" class="product_logo"></a>
+        <h1 class="product_title"><a href="list.html">Lecture listings</a></h1>
+    </div>
+        <div id="link_login">
+		</div>
+
+    <div class="edit-content">
+
+    <h2 class="edit-page-title">Edit subject details</h2>
+
+    <div id="details_tab_container">
+        <ul>
+            <li><a href="#tabs-1">Basic details</a></li>
+            <li><a href="#tabs-2">Advanced edit</a></li>
+        </ul>
+
+        <!-- Basic details -->
+        <div id="tabs-1">
+
+            <label for="det_name" class="det-label">Subject title</label>
+            <input id="det_name" class="det-data" data-manipulates="name" type="text" value="" />
+
+            <label for="det_organiser" class="det-label">Person responsible</label>
+            <input id="det_organiser" class="det-data" data-manipulates="organiser" type="text" value="" >
+
+            <label for="det_location" class="det-label">Location</label>
+            <input id="det_location" class="det-data" data-manipulates="where" type="text" value="" />
+
+            <label for="det_description" class="det-label">Description (Head)</label>
+            <textarea id="det_description" class="det-metadata tinymce" style="width: 90%;" data-manipulates="head"></textarea>
+
+            <label for="det_notes" class="det-label">Notes (Foot)</label>
+            <textarea id="det_notes" class="det-metadata tinymce" style="width: 90%;" data-manipulates="foot" ></textarea>
+
+            <label for="det_specialinstructions" class="det-label">Special instructions</label>
+            <textarea id="det_specialinstructions" class="det-metadata tinymce" style="width: 90%;" data-manipulates="special-instructions" ></textarea>
+
+            <div class="buttonbar">
+                <button class="det_cancel_button" id="det_basic_cancel_button" >Cancel</button>
+                <button class="det_save_button" id="det_basic_save_button" >Save changes</button>
+                <button class="det_back_button" id="det_basic_back_button" >Back to Calendar</button>
+            </div>
+
+        </div>
+
+        <!-- Advanced details -->
+        <div id="tabs-2">
+
+            <ul id="eventgroup_container">
+                <!-- Filled by JS -->
+            </ul>
+
+            <div class="buttonbar">
+                <button class="det_cancel_button" id="det_advanced_cancel_button">Cancel</button>
+                <button class="det_save_button" id="det_advanced_save_button">Save changes</button>
+                <button class="det_back_button" id="det_advanced_back_button" >Back to Calendar</button>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+        <div class='lowjs'>
+			<small>contact <a href='mailto:timetables-support@caret.cam.ac.uk'>timetables-support@caret.cam.ac.uk</a> with bugs, suggestions, errors, corrections, etc.</small>
+		</div>
+
+
+    <!-- Add event group dialog -->
+    <div id="add_eg_dialog" style="display: none;">
+        <label for="add_eg_type_select">Please select what kind of subject would you like to add?</label>
+        <select id="add_eg_type_predefined_select" name="add_eg_type_predefined_select">
+            <!-- Filled by JS -->
+        </select>
+        <input type="text" style="display: none;" id="add_eg_type_exact" value="" />
+    </div>
+
+
+    <!-- Course name confirmation dialog -->
+    <div id="course_name_dialog_container" style="display: none;">
+        You have entered a subject name which doesn't exist yet, so this will create a completely new subject.
+        Are you sure you this is what you want?
+    </div>
+
+    <!-- Course organiser confirmation dialog -->
+    <div id="course_organiser_dialog_container" style="display: none;">
+        You have entered an organiser name which doesn't exists yet, so this will add a new person.
+        Are you sure you this is what you want?
+    </div>
+
+    <!-- Course location confirmation dialog -->
+    <div id="course_location_dialog_container" style="display: none;">
+        You have entered a location name which doesn't exists yet, so this will add a new location.
+        Are you sure you this is what you want?
+    </div>
+
+
+
+    <!-- Page JS-->
+    <script src="js/details.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+There should be a front page which has a selector at the top for tripos and part, driven by top.json. The client will have to
+do some work to top.json, as any tripos and part which occur in any year should be present, but only once.
+
+Underneath should be a list of links, one per course, again including all courses in any years. These links should hide divs
+which contain lists of years for which the course occurs and links on each row of the list to the michaelmas, lent, and easter
+calendars. See attached pdf for example. All this should be drivable from top.json.
+
+The layout of the pages of Mercury is a sequence from the fron page to the cdalendar page and then to a join, tabbed Summary 
+and Details page. See attached pdf.
+
+
+Overall there are three json feeds from the server
+
+server/top -- top.json -- contains the tripos/year/part structure for the dropdowns. Static. Cannot be updated.
+
+server/calendar/<tripospartid> -- calendar.json -- contains info on the courses in a tripos and the rectangles to draw on the
+calendar. Update when calendar changes, reload with different parameters on topbar changes. Update when rectangles move or the
+popup cahnges.
+
+server/details/<courseid> -- details.json -- contains the details about a course. Update when the course details change.

@@ -1,0 +1,34 @@
+This document assumes you are installing Mercury on a linux box. The usual variations apply for Macs, though I don't see there being a significant problem.
+
+These instructions are for a dev box, initially. Production changes are introduced later.
+
+These instructions have been tested to be substantially correct, but may be incomplete in odd areas. Please do a full QA to check things like permissions are ok. Dowloading a spreadsheet and reuploading it exercises, quickly, most of the system.
+
+1. check out https://source.caret.cam.ac.uk/svn/projects/mercury/thallium/ into your document root.
+
+2. Find some known good data directory (data/ on play, say) and blast it over the top of your installation's data directory. [One day sampledata/ will have good data in it for you to copy over, that's what it's for, but it always seems to be behind trunk].
+
+3. edit config/config.txt to point to your base directory.
+
+4. You'll need python 2.6. If you don't have that (cough, cough, ops!), you'll need to install your own python in /usr/local, or somewhere, and then edit  $pypath in web/php/config.php to contain the usual LD_LIBRARY_PATH nonsense (see the live site for an example).
+
+  web/php/config.php whould die! All its contents should be moved into config/config.txt now that there's PHP library functions to use it. I've just not had time to do it yet.
+
+5. You will need python modules ldap (python-ldap-2.4.3 works), pytz (pytz-2006p works), simplejson (simplejson-2.2.1 works), and icalendar (collective-icalendar-2.2-0-g2354d4f works).
+
+	simplejson shouldn't be a dep, but it is. The code which uses it (ldap searcher) should be moved to use the builtin json library: it was written at a time when we were trying to avoid a dependency on Python 2.6, which we later gave up on as a requirement.
+
+6. Fake raven for your dev box by going to web/php/login.php and shanging the setuser line eg to:
+
+  set_user('dps1001');
+
+7. Give yourself infinite privilege by writing into user_<id>.json
+
+  {"triposes":[],"all":true}
+
+eg
+  echo -n '{"triposes":[],"all":true}' >user_dps1001.json
+
+8. off you go.
+
+For a production system, you'll need to move everything not in web out of the docroot. You'll need to tweak web/php/config.php and maybe config/config.txt to point to the new locations, but it should be obvious which paths those are. The current live config is a good example of the apache config: it's nothing sophisticated. Only login.php should be raven protected (as per that config). mod_pagespeed is a good idea, but not necessary.
