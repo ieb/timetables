@@ -171,6 +171,14 @@ function test_user() {
 function generate_hmac($who,$time) {
 	global $keyfile;
 	$key = trim(file_get_contents($keyfile));
+	
+	// We need to ensure that we get some data from the keyfile to salt the hmac
+	// generation with, otherwise anyone could create their own valid MACs.
+	if(strlen($key) == 0) {
+		throw new RuntimeException("No salt available. Check that the "
+			. "configured keyfile exists and is not empty.");
+	}
+	
 	$key = pack("H".strlen($key),$key);
 	return hash_hmac('sha1',"$who:$time",$key);
 }
