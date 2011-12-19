@@ -15,29 +15,31 @@ import indium
 import inputmethods
 import json
 import filepaths
+import getopt
 
 
 days = ['M','Tu','W','Th','F','Sa']
-#termnames = ["Mi","Le","Ea"]
-#termfullnames=["Michaelmas","Lent","Easter"]
 
 
+def execute(optlist, args):
+    os.chdir(os.path.dirname(sys.argv[0]))
 
 
-os.chdir(os.path.dirname(sys.argv[0]))
+    #load merge state from teh top and the subjects files.
 
-#load merge state from teh top and the subjects files.
+    mergeState = inputmethods.DetailsMergeState(json.load(file(filepaths.topJsonFilePath)),json.load(file(filepaths.subjectsJsonFilePath)))
 
-mergeState = inputmethods.DetailsMergeState(json.load(file(filepaths.topJsonFilePath)),json.load(file(filepaths.subjectsJsonFilePath)))
+    #perform a merge operation with each type according to the order configured inthe input methods.
+    for mergeMethod in inputmethods.inputObjects():
+        mergeMethod.merge(mergeState)
 
-#perform a merge operation with each type according to the order configured inthe input methods.
-for mergeMethod in inputmethods.inputObjects():
-    mergeMethod.merge(mergeState)
+    # Regnerate calendar entries
+    print >>sys.stderr,"Regenerating calendars"
+    for tid in mergeState.triposIds:
+        indium.execute([('-p',filepaths.datadir),('-g',None)],[tid])
+    print >>sys.stderr,"done"
 
-# Regnerate calendar entries
-print >>sys.stderr,"Regenerating calendars"
-for tid in mergeState.triposIds:
-    indium.execute([('-p',filepaths.datadir),('-g',None)],[tid])
-print >>sys.stderr,"done"
-
-
+if __name__ == '__main__':
+    (optlist,args) = getopt.getopt(sys.argv[1:],"h")
+    execute(optlist,args)
+    sys.exit(1)
