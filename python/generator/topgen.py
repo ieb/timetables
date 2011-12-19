@@ -102,14 +102,23 @@ for (tripos,part,subject,row) in subjects:
     ids[(tripos,part,subject)] = newid
     adds.append([cleaned[row][0],cleaned[row][2],cleaned[row][3],newid])
 
-# read in pdfs (and set to placeholder)
-pdfsfile = open(srcdatadir+"/pdfs.csv","r")
-allpdfs = set()
-for row in csv.reader(pdfsfile):
-    allpdfs.add(row[0])
-pdfsfile.close()
+# read in source pdfs (and set to placeholder)
+if os.path.isfile(srcdatadir+"/pdfs.csv"):
+    pdfsfile = open(srcdatadir+"/pdfs.csv","r")
+    allpdfs = set()
+    for row in csv.reader(pdfsfile):
+        allpdfs.add(row[0])
+    pdfsfile.close()
 
-pdfsfile = open(srcdatadir+"/pdfs.csv","w")
+# read in data pdfs (and set to placeholder)
+if os.path.isfile(data+"/pdfs.csv"):
+    pdfsfile = open(data+"/pdfs.csv","r")
+    allpdfs = set()
+    for row in csv.reader(pdfsfile):
+        allpdfs.add(row[0])
+    pdfsfile.close()
+
+pdfsfile = open(data+"/pdfs.csv","w")
 pdfs = csv.writer(pdfsfile)
 for ((tripos,part,subject),pdf) in statics.iteritems():
     id = ids[(tripos,part,subject)]

@@ -57,7 +57,7 @@ for year in top['years']:
 
 # Merge in explicit PDF data
 pdfs = collections.defaultdict(list)
-for row in csv.reader(file("%s/%s" % (srcdatadir,"pdfs.csv"))):
+for row in csv.reader(file("%s/%s" % (datadir,"pdfs.csv"))):
     if len(row) < 4:
         continue
     (id,_,name,pdf) = row[0:4]
