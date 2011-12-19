@@ -8,6 +8,7 @@ year = 2011
 
 import csv
 import re
+import os
 import collections
 import json
 
@@ -24,17 +25,18 @@ max_tripos = 0
 max_part = 0
 max_subj = collections.defaultdict(lambda: 0)
 ids = {}
-idmapfile = open(srcdatadir+'/idmap.csv','r')
-idmap = csv.reader(idmapfile)
-for row in idmap:
-    (tripos,part,subject,id) = map(lambda x: clean(x),row)
-    tripos_prefixes[tripos] = id[1:5]
-    max_tripos = max(max_tripos,int(id[1:5]))
-    part_prefixes[(tripos,part)] = id[5:10]
-    max_part = max(max_part,int(id[5:10]))
-    max_subj[(tripos,part)] = max(max_subj[(tripos,part)],int(id[14:]))
-    ids[(tripos,part,subject)] = id
-idmapfile.close()
+if os.path.isfile(datadir+'/idmap.csv'):
+    idmapfile = open(datadir+'/idmap.csv','r')
+    idmap = csv.reader(idmapfile)
+    for row in idmap:
+        (tripos,part,subject,id) = map(lambda x: clean(x),row)
+        tripos_prefixes[tripos] = id[1:5]
+        max_tripos = max(max_tripos,int(id[1:5]))
+        part_prefixes[(tripos,part)] = id[5:10]
+        max_part = max(max_part,int(id[5:10]))
+        max_subj[(tripos,part)] = max(max_subj[(tripos,part)],int(id[14:]))
+        ids[(tripos,part,subject)] = id
+    idmapfile.close()
 
 # read in top for anything new
 topfile =  csv.reader(open(srcdatadir+'/top.csv','r'))
@@ -114,7 +116,7 @@ for pdf in allpdfs:
 pdfsfile.close()
 
 # write updated idmap file (in a sensible order)
-idmapfile = open(srcdatadir+'/idmap.csv','a')
+idmapfile = open(datadir+'/idmap.csv','a')
 idmap = csv.writer(idmapfile)
 for row in adds:
     idmap.writerow(row)
