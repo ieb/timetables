@@ -4,13 +4,13 @@ into a details file. It should also change the mergestate for each course that i
 '''
 
 import os,sys
-import json,csv,random,subprocess,collections,copy
-import util,details
+import json,csv,random,collections
 from fullpattern import FullPattern
 import element
+import details
 import csvverifier
 import filepaths
-import inputmethods
+import pdninput
 
 '''
     Returns a list of input objects, in the order they should be processed.
@@ -19,7 +19,7 @@ def inputObjects():
     return [
             StaticPdf(),
             Yseult(),
-            Pdns(),
+            pdninput.Pdns(),
             Spreadsheet(),
             Fake()
             ]
@@ -94,30 +94,6 @@ class Yseult(object):
             mergeState.courseIds.remove(id)
 
 
-class Pdns(object):
-    def merge(self, mergeState):
-        # Merge in pdn-originated data        
-        if os.path.isfile(filepaths.pdnSrcFilePath):
-            pdn_idx = {}
-            for json_file in [x for x in os.listdir(filepaths.gentmpdir) if x.endswith('.json') and x.startswith('pdnout-')]:
-                data = json.load(file("%s/%s" % (filepaths.gentmpdir,json_file)))
-                (part,course) = data['id']
-                pdn_idx[(part,course)] = data
-            for row in csv.reader(file(filepaths.pdnSrcFilePath)):
-                if row[0] == 'ID' or len(row) < 4:
-                    continue
-                (id,part,course,organiser) = row[0:4]
-                if not id in mergeState.courseIds:
-                    continue
-                if (part,course) in pdn_idx:
-                    data = pdn_idx[(part,course)]
-                    print >>sys.stderr,"Using PDN source for %s %s" % (part,course)
-                    data['organiser'] = organiser
-                    data['id'] = id
-                    filepaths.saveDetailFile(data,id)
-                    mergeState.courseIds.remove(id)
-        else:
-            print "No PDN source files present (%s), skipping" % (filepaths.pdnSrcFilePath)
 
 
 class Spreadsheet(object):
