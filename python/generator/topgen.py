@@ -1,10 +1,14 @@
+#!/usr/bin/env python
 # Use top.csv and idmap.csv to build a complete id map, appending new ids if necessary
-
-datadir = "../../data"
-srcdatadir = "../../source-data"
-gentmpdir = "../../generate-tmp"
-
-year = 2011
+#   Starting from source-data/top.csv in the form
+#  <tripos>,<part>,<subject>,<url>
+# generate or update
+#   idmap.csv   <tripos>,<part>,<subject>,<id>
+#   pdfs.csv <id>,'Entire Course','All Year',<pdf>,<tripos part subject>
+#   top.json
+#   subjects.json
+# If idmap already exists, it is updated. Other files are re-generated.
+#
 
 import csv
 import re
@@ -12,6 +16,22 @@ import os
 import sys
 import collections
 import json
+
+datadir = "../../data"
+srcdatadir = "../../source-data"
+gentmpdir = "../../generate-tmp"
+
+
+# create missing directories if missing
+if not os.path.isdir(datadir):
+    os.mkdir(datadir)
+
+if not os.path.isdir(gentmpdir):
+    os.mkdir(gentmpdir)
+
+
+year = 2011
+
 
 spaces_re = re.compile(r'\s+')
 punc_re = re.compile(r'[^A-Za-z0-9 ]')
