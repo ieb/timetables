@@ -51,7 +51,7 @@ def execute(optlist,args):
     for part in (['IA', 'IB', 'II']):
         pdn.getPart(part)
 
-    pdn.dump(output);
+    pdn.dumpFeed(output);
 
 
 if __name__ == '__main__':

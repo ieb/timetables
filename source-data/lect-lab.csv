@@ -1,0 +1,6 @@
+"Place Regexp","Min Duration","Max Duration","Type"
+"LT",,60,"Lecture"
+"Exp",120,,"Practical"
+"Clsrm",,,"Practical"
+,,60,"Lecture"
+,,,"Practical"
