@@ -9,6 +9,7 @@ year = 2011
 import csv
 import re
 import os
+import sys
 import collections
 import json
 
@@ -39,6 +40,12 @@ if os.path.isfile(datadir+'/idmap.csv'):
     idmapfile.close()
 
 # read in top for anything new
+if not os.path.isfile(srcdatadir+'/top.csv'):
+    print "File %s is missing, this is needed to generate the top level ids and associated files, please create." % (srcdatadir+'/top.csv')
+    print "The file should be a csv file containing rows of the form  <tripos>,<part>,<subject>,<url> "
+    print "Where tripos is not specified, the record takes the last tripos specified."
+    sys.exit(-1)
+
 topfile =  csv.reader(open(srcdatadir+'/top.csv','r'))
 subjects = set()
 nosubj = {}
