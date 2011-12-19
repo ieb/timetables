@@ -9,7 +9,7 @@ pdfsFilePath = srcdatadir+"/pdfs.csv"
 pdfsDataFilePath = datadir+"/pdfs.csv"
 topJsonFilePath = datadir+"/top.json"
 subjectsJsonFilePath = gentmpdir+"/subjects.json"
-
+detailsPrefix = "details_"
 # create missing directories if missing
 if not os.path.isdir(datadir):
     os.mkdir(datadir)
