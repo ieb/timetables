@@ -16,18 +16,14 @@ import os
 import sys
 import collections
 import json
+import filepaths
 
-datadir = "../../data"
-srcdatadir = "../../source-data"
-gentmpdir = "../../generate-tmp"
-
-
-# create missing directories if missing
-if not os.path.isdir(datadir):
-    os.mkdir(datadir)
-
-if not os.path.isdir(gentmpdir):
-    os.mkdir(gentmpdir)
+# read in top for anything new
+if not os.path.isfile(filepaths.topFilePath):
+    print "File %s is missing, this is needed to generate the top level ids and associated files, please create." % (filepaths.topFilePath)
+    print "The file should be a csv file containing rows of the form  <tripos>,<part>,<subject>,<url> "
+    print "Where tripos is not specified, the record takes the last tripos specified."
+    sys.exit(-1)
 
 
 year = 2011
@@ -46,8 +42,8 @@ max_tripos = 0
 max_part = 0
 max_subj = collections.defaultdict(lambda: 0)
 ids = {}
-if os.path.isfile(datadir+'/idmap.csv'):
-    idmapfile = open(datadir+'/idmap.csv','r')
+if os.path.isfile(filepaths.idmapFilePath):
+    idmapfile = open(filepaths.idmapFilePath,'r')
     idmap = csv.reader(idmapfile)
     for row in idmap:
         (tripos,part,subject,id) = map(lambda x: clean(x),row)
@@ -59,14 +55,8 @@ if os.path.isfile(datadir+'/idmap.csv'):
         ids[(tripos,part,subject)] = id
     idmapfile.close()
 
-# read in top for anything new
-if not os.path.isfile(srcdatadir+'/top.csv'):
-    print "File %s is missing, this is needed to generate the top level ids and associated files, please create." % (srcdatadir+'/top.csv')
-    print "The file should be a csv file containing rows of the form  <tripos>,<part>,<subject>,<url> "
-    print "Where tripos is not specified, the record takes the last tripos specified."
-    sys.exit(-1)
 
-topfile =  csv.reader(open(srcdatadir+'/top.csv','r'))
+topfile =  csv.reader(open(filepaths.topFilePath,'r'))
 subjects = set()
 nosubj = {}
 cleanrun = ['','','','']
@@ -102,7 +92,6 @@ for (tripos,part,subject,row) in subjects:
     rowidx[(tripos,part,subject)] = row
     if (tripos,part,subject) in ids:
         continue
-    print "New subject %s" % cleaned[row]
     # Find a tripos match, if possible
     if not tripos in tripos_prefixes:
         max_tripos += 1
@@ -118,27 +107,26 @@ for (tripos,part,subject,row) in subjects:
     max_subj[(tripos,part)] += 1
     sid = max_subj[(tripos,part)]
     newid = "T%04.4d%05.5d%4.4d%3.3d" % (tid,pid,year,sid)
-    print "  assigning %s" % newid
+    print "Assigning %s to new subject %s" % (newid, cleaned[row])
     ids[(tripos,part,subject)] = newid
     adds.append([cleaned[row][0],cleaned[row][2],cleaned[row][3],newid])
 
 # read in source pdfs (and set to placeholder)
-if os.path.isfile(srcdatadir+"/pdfs.csv"):
-    pdfsfile = open(srcdatadir+"/pdfs.csv","r")
-    allpdfs = set()
+allpdfs = set()
+if os.path.isfile(filepaths.pdfsFilePath):
+    pdfsfile = open(filepaths.pdfsFilePath,"r")
     for row in csv.reader(pdfsfile):
         allpdfs.add(row[0])
     pdfsfile.close()
 
 # read in data pdfs (and set to placeholder)
-if os.path.isfile(data+"/pdfs.csv"):
-    pdfsfile = open(data+"/pdfs.csv","r")
-    allpdfs = set()
+if os.path.isfile(filepaths.pdfsDataFilePath):
+    pdfsfile = open(filepaths.pdfsDataFilePath,"r")
     for row in csv.reader(pdfsfile):
         allpdfs.add(row[0])
     pdfsfile.close()
 
-pdfsfile = open(data+"/pdfs.csv","w")
+pdfsfile = open(filepaths.pdfsDataFilePath,"w")
 pdfs = csv.writer(pdfsfile)
 for ((tripos,part,subject),pdf) in statics.iteritems():
     id = ids[(tripos,part,subject)]
@@ -152,7 +140,7 @@ for pdf in allpdfs:
 pdfsfile.close()
 
 # write updated idmap file (in a sensible order)
-idmapfile = open(datadir+'/idmap.csv','a')
+idmapfile = open(filepaths.idmapFilePath,'a')
 idmap = csv.writer(idmapfile)
 for row in adds:
     idmap.writerow(row)
@@ -169,7 +157,7 @@ top = {}
 # create json-candidate for top.json and subjects.json
 triposes_data = []
 for tripos in sorted(data.keys()):
-    print "%s -> %s" % (tripos,data[tripos])
+    print "Updating key for Tripos %s" % (tripos)
     parts_data = []
     for part in sorted(data[tripos].keys()):
         for subject in sorted(data[tripos][part].keys()):
@@ -184,9 +172,17 @@ for tripos in sorted(data.keys()):
 top = { 'years': [{ "name": "2011/12", 'triposes': triposes_data }] }
 
 # save top.json and subjects.json
-out = open(datadir+'/top.json','wb')
+out = open(filepaths.topJsonFilePath,'wb')
 print >>out, json.dumps(top)
 out.close()
-out = open(gentmpdir+'/subjects.json','wb')
+out = open(filepaths.subjectsJsonFilePath,'wb')
 print >>out, json.dumps(subjects)
 out.close()
+
+print "Script Complete ==============================="
+print "Source data was %s " % (filepaths.topFilePath)
+print "Updated %s" % (filepaths.idmapFilePath)
+print "Updated %s" % (filepaths.pdfsDataFilePath)
+print "Updated %s" % (filepaths.subjectsJsonFilePath)
+print "Updated %s" % (filepaths.topFilePath)
+print "Next generate some details json files using pdnfeed/pdngen, ygen, fakegen"
