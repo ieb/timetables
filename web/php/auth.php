@@ -168,10 +168,6 @@ function test_user() {
 	return array_key_exists('user',$_SESSION);	
 }
 
-function pseudorandom_bytes($count) {
-	
-}
-
 /**
  * Reads $count bytes from /dev/random. Returns FALSE on failure (e.g. if we're 
  * on Windows).
