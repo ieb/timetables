@@ -19,10 +19,6 @@ mercury.c.$courselist = $("#courselist");
 mercury.c.$static_timetable_container = $("#static_timetable_container");
 mercury.c.$static_timetables = $("#static_timetables");
 
-mercury.list.show_front_test = function(hash) {
-	return hash.front && (!$.jStorage.get('btdt') || hash.forcefront);
-};
-
 
 // Interactivity wireing
 mercury.list.wire = function() {
@@ -55,17 +51,7 @@ mercury.list.wire = function() {
         var hash_str = event.fragment;
         var hash = event.getState();
 
-		if(mercury.list.show_front_test(hash)) {
-			var dest = window.location.href.split('#')[0] + '#front=1';
-			if(hash.forcefront) {
-				dest += '&forcefront=1';
-			}
-			window.location.href = dest;
-			window.location.reload();
-			return;
-		}
-
-        if (hash.year && hash.tripos && hash.tripospartid) {
+        if (hash_str !== "") {
             // Restore selection state
             mercury.data.selectedYear = hash.year;
             mercury.data.selectedTripos = hash.tripos;
@@ -286,38 +272,9 @@ mercury.list.pushState = function() {
 
 };
 
-// Front page
-mercury.list.switch_to_front = function() {
-	$.jStorage.set('btdt',0);			
-	$('#courselist_container').css('display','none');
-	$('#front_page').css('display','block');
-	$('#select_container').css('display','none');
-    mercury.common.login_link();
-};
 
 // Page init function
 mercury.list.init = function() {
-
-	// Enable btdt checkbox
-	$('#btdt').change(function() {
-		var $this = $(this);
-		if($this.is(':checked')) {
-			$.jStorage.set('btdt',1);
-			// XXX show info dialog
-		} else {
-			$.jStorage.set('btdt',0);			
-		}
-	});
-	// Maybe switch to front page
-	var hash=$.deparam.fragment();
-	if(mercury.list.show_front_test(hash)) {
-		mercury.list.switch_to_front();
-	} else {
-		mercury.list.list_init();
-	}
-}
-
-mercury.list.list_init = function() {
 
     // Fetch top feed
     $.ajax({
@@ -385,9 +342,8 @@ mercury.list.list_init = function() {
                 // Render selector area
                 mercury.list.renderSelectors();
                 mercury.list.renderCourseList();
-				if($('#front_page').css('display') === 'none') {
-	                mercury.c.$select_container.show();
-				}
+                mercury.c.$select_container.show();
+
 
             } else {
                 alert("The following data feed did not produce any data: "+mercury.config.urlTop);
@@ -407,12 +363,4 @@ mercury.list.list_init = function() {
 };
 
 // Start with calling  page init function
-$(document).ready(function() {
-	try {
-		mercury.list.init();
-	} catch(err) {
-	    var error = 'Javascript error on page caught by list init try/catch  :' + err;
-    	mercury.common.report_error('error',error);
-    	alert("An error occurred loading this page. Perhaps you are using an unsupported browser? I suggest the basic javascript-free version, linked below.");
-	}
-});
+$(document).ready(mercury.list.init());

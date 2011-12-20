@@ -586,13 +586,3 @@ throw new SyntaxError('parseJSON');}};}();}
  *   http://github.com/nzakas/yui-misc/
 */
 (function(a){a.idleTimer=function(b,c){var d=false,e=true,f=3e4,g="mousemove keydown DOMMouseScroll mousewheel mousedown touchstart touchmove";c=c||document;var h=function(b){if(typeof b==="number"){b=undefined}var d=a.data(b||c,"idleTimerObj");d.idle=!d.idle;var g=+(new Date)-d.olddate;d.olddate=+(new Date);if(d.idle&&g<f){d.idle=false;clearTimeout(a.idleTimer.tId);if(e)a.idleTimer.tId=setTimeout(h,f);return}var i=jQuery.Event(a.data(c,"idleTimer",d.idle?"idle":"active")+".idleTimer");i.stopPropagation();a(c).trigger(i)},i=function(b){var c=a.data(b,"idleTimerObj");c.enabled=false;clearTimeout(c.tId);a(b).unbind(".idleTimer")},j=function(){var b=a.data(this,"idleTimerObj");clearTimeout(b.tId);if(b.enabled){if(b.idle){h(this)}b.tId=setTimeout(h,b.timeout)}};var k=a.data(c,"idleTimerObj")||{};k.olddate=k.olddate||+(new Date);if(typeof b==="number"){f=b}else if(b==="destroy"){i(c);return this}else if(b==="getElapsedTime"){return+(new Date)-k.olddate}a(c).bind(a.trim((g+" ").split(" ").join(".idleTimer ")),j);k.idle=d;k.enabled=e;k.timeout=f;k.tId=setTimeout(h,k.timeout);a.data(c,"idleTimer","active");a.data(c,"idleTimerObj",k)};a.fn.idleTimer=function(b){if(this[0]){a.idleTimer(b,this[0])}return this}})(jQuery);
-/**
- * jQuery Cookie plugin
- *
- * Copyright (c) 2010 Klaus Hartl (stilbuero.de)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- *
- */
-jQuery.cookie=function(a,b,c){if(arguments.length>1&&String(b)!=="[object Object]"){c=jQuery.extend({},c);if(b===null||b===undefined){c.expires=-1}if(typeof c.expires==="number"){var d=c.expires,e=c.expires=new Date;e.setDate(e.getDate()+d)}b=String(b);return document.cookie=[encodeURIComponent(a),"=",c.raw?b:encodeURIComponent(b),c.expires?"; expires="+c.expires.toUTCString():"",c.path?"; path="+c.path:"",c.domain?"; domain="+c.domain:"",c.secure?"; secure":""].join("")}c=b||{};var f,g=c.raw?function(a){return a}:decodeURIComponent;return(f=(new RegExp("(?:^|; )"+encodeURIComponent(a)+"=([^;]*)")).exec(document.cookie))?g(f[1]):null}
