@@ -1,9 +1,6 @@
 /*
  * MERCURY: Common JS
  * Functionality which is general, used across many pages within the app
- *
- * Note that this file has poorer error reporting than most files because it contains the error reporting code. So many syntax errors here will not be reported.
- * XXX that error reporting should really be moved to another file.
  */
 
 if(!$) {
@@ -25,7 +22,6 @@ mercury.config.urlCalendar = "php/calendar.php";
 mercury.config.urlDetails = "php/details.php";
 mercury.config.urlAuth = "php/auth.php";
 mercury.config.urlLog = "php/log.php";
-mercury.config.urlError = "php/error.php";
 mercury.config.urlDelegations = "php/delegations.php";
 mercury.config.urlAutocompleteCourseTitles = "php/autocomplete_coursetitles.php";
 mercury.config.urlAutocompletePeople = "autocomplete_people.php";
@@ -262,12 +258,12 @@ mercury.common.login_link = function() {
 			home = "";
 		}
 		if(user.loggedin) {
-			out = "Hello "+user.user+". <a href='list.html#front=1&amp;forcefront=1'>intro</a> "+home+" <a href='php/logout.php'>logout</a>"+
+			out = "Hello "+user.user+". <a href='index.html'>intro</a> "+home+" <a href='php/logout.php'>logout</a>"+
 			      " <a class='user_delegate' href='javascript:;'>delegate</a>"+
 			      " <a class='user_rescind' href='javascript:;'>rescind</a>"+
 			      " <a href='log.html'>log</a>";
 		} else {
-			out = "<a href='list.html#front=1&amp;forcefront=1'>intro</a> "+home+" <a href='php/login.php'>admin login</a>";
+			out = "<a href='index.html'>intro</a> "+home+" <a href='php/login.php'>admin login</a>";
 		}
 
         // dialog common
@@ -330,77 +326,29 @@ mercury.common.login_link = function() {
 	});
 };
 
-mercury.common.open_messages = {};
-
 mercury.common.print_messages = function(data) {
-	var current_messages = {};
 	for(var k in data) {
 		var v = data[k];
 		var sk = 'message-'+k;
-		var pk = k.replace(/[^a-z0-9]/gi,'');
-		current_messages[pk] = 1;
-		if(mercury.common.open_messages[pk])
-			continue;
 		if($.jStorage.get(sk))
 		  continue;
 		$.jStorage.set(sk,true);
-		//
-		var $message = $('<div></div>');
-		$message.attr('title','message from the server');
-		$message.attr('id','ptmsg_'+pk);
-		$message.text(v);
-		$('body').append($message);
-		$message.dialog({ 'modal': true });
-		$message.dialog('open');
-		mercury.common.open_messages[pk] = 1;
-	}
-	for(var k in mercury.common.open_messages) {
-		if(mercury.common.open_messages[k] && !current_messages[k]) {
-			$('#ptmsg_'+k).dialog('close');
-			$('#ptmsg_'+k).remove();
-			mercury.common.open_messages[k] = 0;
-		}
+		alert(v);
 	}
 };
 
 mercury.common.ping_interval = 60;
-mercury.common.session = undefined;
-
-mercury.common.get_session = function() {
-	if(mercury.common.session) { return mercury.common.session; }
-	mercury.common.session = $.cookie('jssession');
-	if(mercury.common.session) { return mercury.common.session; }
-	mercury.common.session = Math.floor(Math.random()*100000000);
-	$.cookie('jssession',mercury.common.session,{ 'path': '/' });
-	return mercury.common.session;
-};
-
-mercury.common.parent_url = function() {
-	if(parent) { return parent.window.location.href; }
-	else { return window.location.href; }
-};
 
 mercury.common.ping = function() {
 	$.ajax({
 		type: "GET",
 		url: mercury.config.urlPing,
-		data: {
-			'session': mercury.common.get_session(),
-			'url': window.location.href,
-			'parent': mercury.common.parent_url()
-		},
 		dataType: "json",
+		// Treat those two imposters just the same
         success: function(data, textStatus, jqXHR) {
         	if(data.messages)
 	        	mercury.common.print_messages(data.messages);
-	        else
-	        	mercury.common.print_messages({});	        
 			mercury.common.ping_interval = data.ping || 60;
-			if(data.reload) {
-				setTimeout(function() {
-					window.location.href = mercury.config.urlList;
-				},data.reload*1000);
-			}
         },
         error: function(jqXHR, textStatus, errorThrown) {
         }
@@ -590,6 +538,7 @@ mercury.common.abort = function() {
 	}
 	aborting = true;	
 	window.location.href = mercury.config.urlAbort;
+	//throw new Error('halt');
 };
 
 mercury.common.idle_init = function() {
@@ -615,47 +564,11 @@ mercury.common.idle_note = function() {
 mercury.common.note = function() {
 };
 
-mercury.common.report_error = function(level,message,report) {
-    $.ajax({
-        type: "POST",
-        url: mercury.config.urlError,
-        dataType: "json",
-        data: {
-			'session': mercury.common.get_session(),
-			'url': window.location.href,
-			'parent': mercury.common.parent_url(),
-			'time': new Date().getTime(),
-			'origin': 'client-javascript-nos', // XXX allow explicit specifcaiton
-			'message': message,
-			'report': report || message,
-			'level': level,
-			'browser': navigator.userAgent
-        },
-        success: function(data, textStatus, jqXHR) {
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-        }
-    });
-};
-
-window.onerror = function (msg, url, num) {
-    var error = 'Javascript error on page caught by onerror  :' + msg + ';' + url + ';' + num;
-    mercury.common.report_error('error',error);
-	alert("An error occurred loading this page. Perhaps you are using an unsupported browser? I suggest the basic javascript-free version, linked below.");
-    return true;
-}
-
 jQuery(function() { 
-	try {
-		mercury.common.lock_init();
-		mercury.common.idle_note();
-		mercury.common.spinner_init();
-		mercury.common.periodic_ping();
-		mercury.common.note();
-		$('.product_title').click(function() { window.location.href = 'list.html' });
-	} catch(err) {
-	    var error = 'Javascript error on page caught by init try/catch  :' + err;
-    	mercury.common.report_error('error',error);
-    	alert("An error occurred loading this page. Perhaps you are using an unsupported browser? I suggest the basic javascript-free version, linked below.");
-	}
+	mercury.common.lock_init();
+	mercury.common.idle_note();
+	mercury.common.spinner_init();
+	mercury.common.periodic_ping();
+	mercury.common.note();
+	$('.product_title').click(function() { window.location.href = 'list.html' });
 });
