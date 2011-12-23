@@ -1,5 +1,4 @@
 <?php
-
 $sysdir = "../../";
 $sysdir_up = "../";
 $pypath = "python";
@@ -12,3 +11,6 @@ $keyfile = "../../secret/hmac-key";
 $colour = null;
 
 $logfile = '/tmp/mercury.log';
+
+// Specify a default timezone to use.
+date_default_timezone_set("Europe/London");

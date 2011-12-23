@@ -45,9 +45,13 @@
 		</div>
     </div>
 
-	<!-- front page -->
-	<div id="front_page" style="display: none;">
-		<div id="fp_inner">
+    <!-- Course list -->
+    <div id="courselist_container">
+		<!-- front page -->
+		<div id="front_page">
+			<p class="list_link">
+				<a href='list.html'>begin &raquo;</a>
+			</p>
 			<h1>Lecture Listings</h1>
 			<p>
 				Information about lectures provided by Faculties for the academic year 2011-12 is provided here, either in the form of direct links to Faculty or departmental websites 
@@ -81,10 +85,6 @@
 			<p>
 				Information on how to download the content to individual electronic calendars will follow.				
 			</p>
-			<p class="fp_notice">
-				<small style="display: block; float: right;">(you can always return here by clicking on "intro")</small>
-				<input type="checkbox" id="btdt" style="height: 16px;"/> I have seen this page, don't show it to me again.
-			</p>
 			<div class="btn"><a href="list.html">Begin</a><span></span></div>
 			<div class="clear"></div>
 			<h2>Extra Information</h2>
@@ -110,50 +110,15 @@ onto a variety of training courses run by participating University training
 providers
 			</p>
 
-		</div>
-	</div>
 
-    <!-- Course list -->
-    <div id="courselist_container">
-        <h2 class="page-title"></h2>
-        <div id="static_timetable_container" style="display:none;">
-            <p>You can download the timetable for this course by clicking on the link(s) below</p>
-            <ul id="static_timetables">
-
-            </ul>
-        </div>
-        <ul id="courselist">
-            <!-- Filled by JS -->
-        </ul>
-        <div class='lowjs'>
-			<a href='php/static/list.php'>switch to basic javascript-free version</a><br/>
-			<em>
-				(this is useful for people with very old web-browsers, screenreaders, search engines, etc, or if you want to view everything in a single page list).
-			</em>
-			<br/><small>contact <a href='mailto:timetables-support@caret.cam.ac.uk'>timetables-support@caret.cam.ac.uk</a> with bugs, suggestions, errors, corrections, etc.</small>
+			<p class="lowjs">
+				<small>contact <a href='mailto:timetables-support@caret.cam.ac.uk'>timetables-support@caret.cam.ac.uk</a> with bugs, suggestions, errors, corrections, etc.</small>
+			</p>
+			
 		</div>
-    </div>
-    <!-- upload -->
-    <div id='upload_spreadsheet' title="Upload new spreadsheet">
-        <form enctype="multipart/form-data" action="php/upload.php" target="spreadsheet_upload_target" method="POST">
-            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-            <input type="hidden" id="upload_id" name="id" value="" />            
-            Choose a file to upload: <input name="spreadsheet" type="file" /><br />
-            <input type="submit" value="Upload File" />
-        </form>
-        <iframe id="spreadsheet_upload_target" name="spreadsheet_upload_target" src="blank.html" style="width:0;height:0;border:0px solid #fff;"></iframe> 
-    </div>
-    
-    <!-- status update -->
-    <div id='status_update' title='Update status'>
-        <form action="javascript:;" action="php/audit.php" method="POST">
-            Status: <input type="text" id="status_status"/>
-            <input type="hidden" id="status_id" name="id" value="" />
-            <button id='status_update_button'>Update</button>
-        </form>        
     </div>
 
     <!-- Page JS-->
-    <script src="js/list.js" type="text/javascript"></script>
+    <script src="js/front.js" type="text/javascript"></script>
 </body>
 </html>

@@ -500,12 +500,5 @@ mercury.view.recompute_calendar = function() {
 
 // Start with calling  page init function
 $(document).ready(function() {
-	try {
-		mercury.view.init();
-	} catch(err) {
-	    var error = 'Javascript error on page caught by view init try/catch  :' + err;
-    	mercury.common.report_error('error',error);
-    	alert("An error occurred loading this page. Perhaps you are using an unsupported browser? I suggest the basic javascript-free version, linked below.");
-	}
-
+	mercury.view.init();
 });
