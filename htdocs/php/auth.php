@@ -63,7 +63,7 @@ function log_it($what) {
 function get_log() {
     global $sysdir;
     
-    $log = file_get_contents($sysdir."data/log.txt");
+    $log = @file_get_contents($sysdir."data/log.txt");
     // reverse log
     $log = join("\n",array_reverse(preg_split('/[\\n\\r]+/',$log)));
     return $log;    
