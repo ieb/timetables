@@ -3,20 +3,21 @@
 	<head>
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="../css/timetables.css" ></link>
-		<style type="text/css" >
-		body {
-		    background-imagex: url('../pages/Student_-_Home_-_Not_Logged_In.jpg')
-		}
-		</style>
+	   <style type="text/css" >
+        body {
+            background-imagex: url('../pages/Student_-_Home_-_Logged_In.jpg')
+        }
+        </style>
+		
 	</head>
-	
 	<body>
 
 <div id="container" >
     <div id="header">
         <img src="../images/logo.png" />
         <ul id="top-navigation">
-           <li><a href="#loginX">Log in</a></li>
+           <li><a href="#loginX">Logged in as Alex Smith</a></li>
+           <li><a href="#loginX">Logged Out</a></li>
            <li><a href="#timetable-help">Timetable help</a>
         </ul> <!-- end top-navigation -->
     </div> <!-- end header -->
@@ -27,51 +28,10 @@
    
     <div id="your-timetable">
     <ul>
-        <li>Your Timetable</li>
-    <ul>
+        <li>Your Timetable <span class="counter">(0)</span><a href="#dropdown" id="timetable-dropdown">Timtable.</a></li>
+    </ul>
    	</div><!-- end your-timetable-->
-    <div class="clear"></div>
-    <div id="build-your-timetable">
-          <div id="build-your-timetable-login" >
-			<p>
-				Login to start
-			</p>
-			<p>
-			  building your timetable.
-			</p>
-			<div class="button">
-            <div class="button-text" >
-            <a href="#login" >Log in</a>
-            </div>
-            </div>
-          </div><!-- end build-your-timetable-login -->
-          <div id="how-it-works">
-             <h2>How it works</h2>
-             <p>
-               You can use the ecture list to build your own persontal study timetable, 
-			   with everything you need in one place.
-        	 </p>
-          </div>
-
-             
-          <ul id="build-your-timetable-options">
-           <li>
-              <div class="label">1</div>
-              <div class="title" >Find your lectures</div>
-              <div>Browse the main lecture list to find your lectures and tutorials</div>
-		   </li>
-           <li>
-              <div class="label">2</div>
-              <div class="title">Add to your timetable</div>
-              <div>Add your lectures to your timetable</div>
-		   </li>
-           <li>
-              <div class="label">3</div>
-              <div class="title">View it how you like</div>
-              <div>You can view your timetable on this site, print it, or export it to you usual calendar app.</div>
-		   </li>
-          </ul> <!-- end build your timetable options -->
-    </div><!-- end build-your-timetable -->    
+   	<div id="logged-in-compensation" />
     <div id="list-of-lectures">
       <p>
 Start finding lectured relevant to you by choosing a Faculty below or doing a keyword search.
