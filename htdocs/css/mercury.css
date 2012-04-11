@@ -505,9 +505,8 @@ thead .fc-thu, thead .fc-fri, thead .fc-sat, thead .fc-sun, thead .fc-mon, thead
 
 /* FRONT PAGE */
 
-#front_page #fp_inner {
+#front_page {
 	max-width: 800px;
-	padding: 20px;
 	margin: auto;
 }
 
@@ -664,60 +663,4 @@ table#time_table, #time_table tr, #time_table td, #time_table th {
 .btn_try { background-color: #002c85; }
 .clear {
 	clear: both;
-}
-
-#front_page {
-	background: white;
-}
-
-.fp_notice {
-	border: 1px solid red;
-	background: #DADEE4;
-	padding: 8px;
-}
-
-#report_select ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#report_select li {
-	float: left;
-	border: 1px solid #bbb;
-	border-bottom-width: 0;
-	margin: 0;
-	padding: 0;
-}
-
-#report_select a {
-	text-decoration: none;
-	display: block;
-	background: #eee;
-	padding: 0.24em 1em;
-	color: #00c;
-	width: 16em;
-	text-align: center;
-}
-
-#report_select a:hover {
-	background: #ddf;
-}
-
-#report_select .selected {
-	border-color: black;
-}
-
-#report_select .selected a {
-	position: relative;
-	top: 1px;
-	background: white;
-	color: black;
-	font-weight: bold;
-}
-
-#subselect {
-	border-top: 1px solid black;
-	clear: both;
-	padding: 0 1em;
 }

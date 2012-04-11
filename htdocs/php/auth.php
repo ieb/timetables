@@ -63,7 +63,7 @@ function log_it($what) {
 function get_log() {
     global $sysdir;
     
-    $log = file_get_contents($sysdir."data/log.txt");
+    $log = @file_get_contents($sysdir."data/log.txt");
     // reverse log
     $log = join("\n",array_reverse(preg_split('/[\\n\\r]+/',$log)));
     return $log;    
@@ -168,15 +168,72 @@ function test_user() {
 	return array_key_exists('user',$_SESSION);	
 }
 
+/**
+ * Reads $count bytes from /dev/random. Returns FALSE on failure (e.g. if we're 
+ * on Windows).
+ */
+function pseudorandom_string_dev_random($count) {
+	if($count < 1)
+		throw new InvalidArgumentException("Count was < 1: " . $count);
+	
+	$dev_random = @fopen("/dev/random", "r");
+	if($dev_random !== FALSE) {
+		$pseudo_random_data = fread($dev_random, $count);
+		fclose($dev_random);
+		if(strlen($pseudo_random_data) === $count) {
+			return $pseudo_random_data;
+		}
+	}
+	return FALSE;
+}
+
+/** Generates $length random bytes using mt_rand. */
+function pseudorandom_string_mt_rand($length) {
+	if($length < 1)
+		throw new InvalidArgumentException("length was < 1: " . $length);
+	$pseudo_random_string = "";
+	for($i = 0; $i < $length; ++$i) {
+		$pseudo_random_string .= chr(mt_rand(0, 255));
+	}
+	return $pseudo_random_string;
+}
+
+/**
+ * Generates a random string sutable for using to key hash_hmac. A sequence of
+ * random bytes are generated which are then hashed by the specified algorithm 
+ * (default is sha256) and the result is returned.
+ */
+function generate_key($source_bytes_count = 64, $hash_algo = "sha256") {
+	$pseudo_random_data = pseudorandom_string_dev_random($source_bytes_count);
+	if(!$pseudo_random_data)
+		$pseudo_random_data = pseudorandom_string_mt_rand($source_bytes_count);
+	
+	assert(strlen($pseudo_random_data) === $source_bytes_count);
+	return hash($hash_algo, $pseudo_random_data);
+}
+
+/** Writes a key to the configured key file. Throws a RuntimeException if the 
+ * key could not be written to the file. */
+function write_default_key($keyfile, $key) {
+	$keyfile = fopen($keyfile, "w");
+	if(!$keyfile) {
+		throw new RuntimeException("Couldn't create default keyfile at: " 
+			. $keyfile);
+	}
+	
+	assert(fwrite($keyfile, $key, strlen($key)));
+	fclose($keyfile);
+}
+
 function generate_hmac($who,$time) {
 	global $keyfile;
-	$key = trim(file_get_contents($keyfile));
+	$key = trim(@file_get_contents($keyfile));
 	
 	// We need to ensure that we get some data from the keyfile to salt the hmac
 	// generation with, otherwise anyone could create their own valid MACs.
 	if(strlen($key) == 0) {
-		throw new RuntimeException("No salt available. Check that the "
-			. "configured keyfile exists and is not empty.");
+		$key = generate_key();
+		write_default_key($keyfile, $key);
 	}
 	
 	$key = pack("H".strlen($key),$key);
