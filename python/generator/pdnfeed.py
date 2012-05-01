@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+import os,sys
+
+heredir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0,heredir+"/../lib")
+
+
+
 # Writes pdn-feed.json from scraping PDN site.
 import sys
 import getopt

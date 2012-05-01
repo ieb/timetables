@@ -65,7 +65,7 @@ def execute(optlist,args):
     if arg:
         file = args[0]
     
-    os.chdir(os.path.dirname(script))
+#    os.chdir(os.path.dirname(script))
     setup_logging(logpath)
     
     if mode == None:

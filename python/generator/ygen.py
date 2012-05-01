@@ -6,7 +6,6 @@ import os,sys
 
 heredir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0,heredir+"/../lib")
-os.chdir(os.path.dirname(sys.argv[0]))
 
 import csv
 import re

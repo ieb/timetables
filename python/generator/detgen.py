@@ -22,7 +22,6 @@ days = ['M','Tu','W','Th','F','Sa']
 
 
 def execute(optlist, args):
-    os.chdir(os.path.dirname(sys.argv[0]))
 
 
     #load merge state from teh top and the subjects files.
