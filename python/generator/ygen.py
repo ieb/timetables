@@ -84,7 +84,7 @@ def process_lecturer(lecturers,new):
 def process_event_internal(part,tw,when,subject,det1,det2):
     # extract lecturers
     lecturers = []
-    det2 = lecturer_re.sub(lambda x: process_lecturer(lecturers,x),unicode(det2))    
+    det2 = lecturer_re.sub(lambda x: process_lecturer(lecturers,x),unicode(det2,'utf-8','replace'))    
     det2 = interlectjunk_re.sub('',det2)
     det2 = isolatedpunc_re.sub(' ',det2)
     det2 = trailpunc_re.sub('.',det2)

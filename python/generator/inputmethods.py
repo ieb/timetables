@@ -103,7 +103,7 @@ class Spreadsheet(object):
             for csv_file in [x for x in os.listdir(filepaths.newCourseSheetDir) if x.endswith('.csv')]:
                 print >>sys.stderr,"Reading %s" % csv_file
                 ds = details.Details.from_csv(open("%s/%s" % (filepaths.newCourseSheetDir,csv_file)),verifier = csvverifier.Verifier())
-                if not ds.id in courseIds:
+                if not ds.id in mergeState.courseIds:
                     print >>sys.stderr,"    already handled, skipping"
                     continue
                 filepaths.saveDetailFile(ds.to_json(),ds.id)
