@@ -1,12 +1,21 @@
-The ping system is used to deploy messages and to force updates on users. It is designed to be used in conjunction with mod_pagespeed, or similar. 
+The ping system is used to deploy messages and to force updates on users. 
+It is designed to be used in conjunction with mod_pagespeed, or similar. 
 
-The ping system's main method is a periodic request sent by clients to the server whenever they are on a page. They are returned a payload which contains (at the moment) up to three things:
+The ping system's main method is a periodic request sent by clients to the server 
+whenever they are on a page. They are returned a payload which contains (at the moment) up to three things:
 
   i. any message to be displayed via an alert box;
   ii. a command to force any receiver to return to the login page;
   iii. the time to the next ping.
   
-The time to ping is controlled by the config (config/config.txt, I think). During changes it can be ramped down to ensure responsiveness; during normal operation it can be ramped up again to reduce load. Sending a reset is also something controlled from the config. The motd's are set by files in the data directory which are set by hand: this includes a key to identify the message and distinguish it from all others. It should be unique throughout time (eg include datestamp). Local storage on the client uses this key to ensure a message is only displayed once. See web/php/ping.php for details, it's very simple. For example:
+The time to ping is controlled by the config (config/config.txt, I think). 
+During changes it can be ramped down to ensure responsiveness; during normal 
+operation it can be ramped up again to reduce load. Sending a reset is also 
+something controlled from the config. The motd's are set by files in the data 
+directory which are set by hand: this includes a key to identify the message 
+and distinguish it from all others. It should be unique throughout time (eg 
+include datestamp). Local storage on the client uses this key to ensure a message 
+is only displayed once. See web/php/ping.php for details, it's very simple. For example:
 
   echo -n 'This is a message' >data/msg_test_201111221340.txt
   
