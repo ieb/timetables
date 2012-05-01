@@ -29,7 +29,7 @@ You will find working documentation in the Wiki and issue tracker associated wit
 * /python/indium - final processing script to build JSON feeds to support the webapp, see indium.py for details.
 * /python/lib - supporting Python library code.
 * /spec - orriginal specification for web application
-* /web - php web application with html pages
+* /htdocs - php web application with html pages
 
 
 # Installation
@@ -44,17 +44,17 @@ You will find working documentation in the Wiki and issue tracker associated wit
     * simplejson 2.2.1 ''sudo easy_install simplejson''
     * icalendar ''sudo easy_install icalendar''
 
-## Map the web application into Apache.
+## Map the htdocs application into Apache.
 
 Edit config/config.txt to represent your installation. The value of base must be changed to match the path where you want the application to be hosted. It is used by both the Python code at generation stage and the Php code at application runtime.
 
-Include config/apache.config in an appropriate place, replacing __SOURCE__ with the appropriate path to your source code. It maps the /web into the HTTPD url space. You may want to add other configuration statements to suite your environment.
+Include config/apache.config in an appropriate place, replacing __SOURCE__ with the appropriate path to your source code. It maps the /htdocs into the HTTPD url space. You may want to add other configuration statements to suite your environment.
 
-Look in web/php/config.php and check that the paths are ok, in particular the path of the python executable.
+Look in htdocs/php/config.php and check that the paths are ok, in particular the path of the python executable.
 
 ## Authentication
 
-Authentication is performed by Apache, which should protect web/php/login.php. The default configuration uses Basic Auth and an password file. For a simple deployment you can use this approach. Follow the instructions in config/apache.config to set this up. (ie create a password file in config/passwords using htpasswd)
+Authentication is performed by Apache, which should protect htdocs/php/login.php. The default configuration uses Basic Auth and an password file. For a simple deployment you can use this approach. Follow the instructions in config/apache.config to set this up. (ie create a password file in config/passwords using htpasswd)
 
 ## Authorization
 
@@ -76,6 +76,9 @@ First create some directories
     chgrp www-data data/log.txt
     chmod g+w data/log.txt
     cd python/generator
+    
+    
+Edit topgen.py to select the year of interest.    
 
 Starting from source-data/top.csv, generate (or update) data/idmap.csv data/pdfs.csv, data/top.json, data/subjects.json
 
@@ -90,9 +93,17 @@ Acquiring subject data will be specific to the institution. The aim is to create
 
 This is an example of generating json subject files from an external source. If you have access to the CUDN or a Raven account then you can generate data from Department of Physiology, Development and Neuroscience online timetable.
 
+Edit pdninput.py to select the year of interest
+
 Create generator-tmp/pdn-feed.json from http://www.pdn.cam.ac.uk/teaching/resources/timetabledb/htdocs/ (Raven Login required)
 
     python pdnfeed.py
+    
+If you are outside the CUDN you will need to login with Raven and grab the Raven cookie form your web-browser to let the script act on your behalf eg:
+
+    python pdnfeed.py -u '1!200!!20010701T001018Z!20330701T001048Z!7200!1332847450-3489-44!xn999!xxx!!!1!XEXmK0Z(ASSK-R8d3zg_'
+    # Note, the above is an example, and wont work, but it should give you an idea of what the cookie looks like.
+   
 
 Using source-data/lect-lab.csv to discriminate between lectures and labs, generate one json file per subject in generator-tmp/pdn-feed.json
 
@@ -101,6 +112,8 @@ Using source-data/lect-lab.csv to discriminate between lectures and labs, genera
 ### Generate Data from Department of Medieval and Modern Languages (Optional)
 
 This is an example of generating json subject files from an local source. In this case /generator-tmp/subjects.json contains subject data. ygen.py converts this into subject json files, one per subject.
+
+Edit ygen.py to adjust the IDs as directed. the variable mml is a key value map of the stub IDs taken from data/idgmap.csv and ygen.py must be updated for it to work.
 
     python ygen.py
 
