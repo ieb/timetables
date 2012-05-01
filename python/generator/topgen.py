@@ -25,8 +25,17 @@ if not os.path.isfile(filepaths.topFilePath):
     print "Where tripos is not specified, the record takes the last tripos specified."
     sys.exit(-1)
 
+# Adjust to the start of the academic year
+# year = 2011
+year = 2012
+# year = 2013
+# year = 2014
+# year = 2015
 
-year = 2011
+#ACADEM_YEAR = "2011/2012"
+ACADEM_YEAR = "2012/2013"
+#ACADEM_YEAR = "2013/2014"
+#ACADEM_YEAR = "2014/2015"
 
 
 spaces_re = re.compile(r'\s+')
@@ -169,7 +178,7 @@ for tripos in sorted(data.keys()):
             part_data = { 'name': cleaned[row][2], 'id': id[0:14]}
         parts_data.append(part_data)
     triposes_data.append({ 'parts': parts_data, 'name': cleaned[row][0] })
-top = { 'years': [{ "name": "2011/12", 'triposes': triposes_data }] }
+top = { 'years': [{ "name": ACADEM_YEAR, 'triposes': triposes_data }] }
 
 # save top.json and subjects.json
 out = open(filepaths.topJsonFilePath,'wb')

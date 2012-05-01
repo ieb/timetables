@@ -7,22 +7,23 @@ import details
 import element
 import httplib,re,time,urllib,sys,collections,datetime,util
 from fullpattern import FullPattern
+import codecs
 
 term_names = ["Mi","Le","Ea"]
 day_names = ["M","Tu","W","Th","F","Sa","Su"]
 terms_full = ['Michaelmas','Lent','Easter']
 
-term_start = [
-              datetime.date(2011,10,4),
-              datetime.date(2012,1,17),
-              datetime.date(2012,4,24),
-              datetime.date(2012,9,30) # end of year
-]
+# see http://www.cam.ac.uk/univ/termdates.html
+# term_start = [datetime.date(2011,10,4), datetime.date(2012,1,17), datetime.date(2012,4,24), datetime.date(2012,9,30) ] # last element is end of year 
+term_start = [datetime.date(2012,10,2),datetime.date(2013,1,15),datetime.date(2013,4,23), datetime.date(2012,9,30) ]
+#term_start = [datetime.date(2013,10,8),datetime.date(2014,1,14),datetime.date(2014,4,22), datetime.date(2012,9,30) ]
+#term_start = [datetime.date(2014,10,7),datetime.date(2015,1,13),datetime.date(2015,4,21), datetime.date(2012,9,30) ]
+#term_start = [datetime.date(2015,10,6),datetime.date(2016,1,12),datetime.date(2016,4,19), datetime.date(2012,9,30) ]
 
 
-pdn_host = "www.pdn.cam.ac.uk"
-pdn_base = "/teaching/resources/timetabledb/htdocs/"
-pdn_query = "/teaching/resources/timetabledb/htdocs/index.php"
+PDN_HOST = "www.pdn.cam.ac.uk"
+PDN_BASE = "/teaching/resources/timetabledb/htdocs/"
+PDN_QUERY = "/teaching/resources/timetabledb/htdocs/index.php"
 
 
 class Pdns(object):
@@ -54,16 +55,16 @@ class Pdns(object):
 
     def getParts(self):
         if not self.conn:
-            self.conn = httplib.HTTPConnection(pdn_host)
+            self.conn = httplib.HTTPConnection(PDN_HOST)
         headers = {}
         if self.ucam_webauth:
             headers['Cookie'] = "Ucam-WebAuth-Session=%s" % self.ucam_webauth
-        self.conn.request("GET",pdn_base,headers=headers)
+        self.conn.request("GET",PDN_BASE,headers=headers)
         r1 = self.conn.getresponse()
         if r1.status == 302:
-            raise Exception("Please go to http:/%s%s and login to capture webauth token" % (pdn_host,pdn_base))
+            raise Exception("Please go to http:/%s%s and login to capture webauth token" % (PDN_HOST,PDN_BASE))
         if r1.status != 200:
-            raise Exception("Didn't get 200 getting http:/%s%s  %d" % (pdn_host,pdn_base, r1.status))
+            raise Exception("Didn't get 200 getting http:/%s%s  %d" % (PDN_HOST,PDN_BASE, r1.status))
         base = unicode(r1.read(),"ISO-8859-1")
 
         # Find Module selector
@@ -104,10 +105,10 @@ class Pdns(object):
             headers = {"Content-type": "application/x-www-form-urlencoded" }
             if self.ucam_webauth:
                 headers['Cookie'] = "Ucam-WebAuth-Session=%s" % self.ucam_webauth
-            self.conn.request("POST",self.pdn_query,params,headers)
+            self.conn.request("POST",PDN_QUERY,params,headers)
             r1 = self.conn.getresponse()
             if r1.status != 200:
-                raise Exception("Didn't get 200 getting http:/%s/%s" % (pdn_host,pdn_base))
+                raise Exception("Didn't get 200 getting http:/%s/%s" % (PDN_HOST,PDN_BASE))
             data = unicode(r1.read(),"ISO-8859-1")
             self.process_subject(part,name,data)
             time.sleep(self.sleepTime)

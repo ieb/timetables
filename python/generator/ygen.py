@@ -1,3 +1,5 @@
+import logging
+import codecs
 datadir = "../../data"
 srcdatadir = "../../source-data"
 gentmpdir = "../../generate-tmp"
@@ -36,13 +38,17 @@ subjname_map = {
     'comparative': 'Comparative Studies'
 }
 
+# Once you have generated a new data/idmap.csv for the year, look in that file to find the top level
+# MML lecture IDS and add them here. All IDS in Part IA start with the IA value and so forth.
+# This changes every year and if any records are added to the master mapping.
 mml = {
-    'IA': 'T0019001382011',
-    'IB': 'T0019001392011',
-    'II': 'T0019001752011',
-    'LingI': 'T0031002042011',
-    'LingII': 'T0031002072011'
+    'IA': 'T0002000112012',
+    'IB': 'T0002000022012',
+    'II': 'T0002000032012',
+    'LingI': 'T0002000862012',
+    'LingII': 'T0002001062012'
 }
+
 
 days = {
     'Monday': 'M',
@@ -53,7 +59,9 @@ days = {
 }
 
 # skip these as they're special (extrenal courses, etc)
-skips = set(['T0019001752011003','T0019001392011009'])
+# "Modern & Medieval Languages (including Linguistics)","MML Part II","Linguistics",
+# "Modern & Medieval Languages (including Linguistics)","MML Part IB","Linguistics",
+skips = set(['T0002000022012005','T0002000032012010'])
 
 # Load MML subject data
 subjects = json.load(open(gentmpdir+'/subjects.json'))

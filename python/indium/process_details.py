@@ -7,7 +7,12 @@ import year
 
 # XXX hardwired
 import datetime
-year = year.Year([datetime.date(2011,10,4),datetime.date(2012,1,17),datetime.date(2012,4,24)])
+# see http://www.cam.ac.uk/univ/termdates.html
+#year = year.Year([datetime.date(2011,10,4),datetime.date(2012,1,17),datetime.date(2012,4,24)])
+year = year.Year([datetime.date(2012,10,2),datetime.date(2013,1,15),datetime.date(2013,4,23)])
+#year = year.Year([datetime.date(2013,10,8),datetime.date(2014,1,14),datetime.date(2014,4,22)])
+#year = year.Year([datetime.date(2014,10,7),datetime.date(2015,1,13),datetime.date(2015,4,21)])
+#year = year.Year([datetime.date(2015,10,6),datetime.date(2016,1,12),datetime.date(2016,4,19)])
 
 def update_calendar(det_str,cal):
     c = course.Course(det_str['id'],det_str['name'])
